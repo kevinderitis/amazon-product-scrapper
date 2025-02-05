@@ -124,7 +124,7 @@
 
             if (scrapedData.imagesRev && scrapedData.imagesRev.length > 0) {
                 const promises = scrapedData.imagesRev.map((url, index) => 
-                    addImageToZip(url, `review${index + 1}.jpeg`, 'reviews')
+                    addImageToZip(url, `review${index + 1}.jpeg`, 'images')
                 );
                 await Promise.all(promises);
             }
