@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        input[type="url"] {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Amazon Scraper</h1>
+    <form id="scrapeForm">
+        <input type="url" id="urlInput" required placeholder="Ingrese la URL a scrapear">
+        <button type="submit">Scrapear</button>
+    </form>
+    <textarea id="resultTextarea" readonly placeholder="Los resultados se mostrarán aquí"></textarea>
+    <button id="downloadBtn">Descargar JSON</button>
+    <button id="copyBtn">Copiar</button>
+
+    <script>
+        const scrapeForm = document.getElementById('scrapeForm');
+        const urlInput = document.getElementById('urlInput');
+        const resultTextarea = document.getElementById('resultTextarea');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const copyBtn = document.getElementById('copyBtn');
+
+        scrapeForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = urlInput.value;
+            try {
+                const response = await fetch('/scrape', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url }),
+                });
+                const data = await response.json();
+                resultTextarea.value = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+                resultTextarea.value = 'Error al realizar el scraping';
+            }
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            const data = resultTextarea.value;
+            if (!data) return;
+
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'scrape_result.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        copyBtn.addEventListener('click', () => {
+            resultTextarea.select();
+            document.execCommand('copy');
+        });
+    </script>
+</body>
+</html>
