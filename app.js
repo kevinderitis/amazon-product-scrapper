@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY ? process.env.OPENAI_API_KEY : 'sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    apiKey: process.env.OPENAI_API_KEY
 });
 
 app.use(express.json());
@@ -91,12 +91,13 @@ async function scrapeAmazonProductImages(url) {
     }
 }
 
-const generateProductData = async (productName, productDescription, images) => {
+const generateProductData = async (productName, productDescription, images, imagesRev) => {
     const prompt = `
   Toma en cuenta el siguiente producto:
   - Nombre: ${productName}
   - Descripción: ${productDescription}
   - Imágenes: ${images.join(', ')}
+  - Imágenes de reseñas: ${imagesRev.join(', ')}
   
   Genera un objeto JSON en español de mexico con la siguiente estructura:
   {
@@ -124,7 +125,7 @@ const generateProductData = async (productName, productDescription, images) => {
     }
   }
   
-  Es muy importante que se respete la estructura del objeto y que el largo de los valores sean similares a los siguientes:
+  Es muy importante que se respete la estructura del objeto (cantidad de claves y valores) y que el largo de los valores sean similares a los siguientes:
 
   Objeto de ejemplo:
 
@@ -331,7 +332,7 @@ app.post('/scrape', async (req, res) => {
 
     const { productName, productDescription, images, imagesRev } = await scrapeAmazonProductImages(url);
 
-    // const productData = await generateProductData(productName, productDescription, images);
+    // const productData = await generateProductData(productName, productDescription, images, imagesRev);
 
     const productData = { productName, productDescription, images, imagesRev };
 

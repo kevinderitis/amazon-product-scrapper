@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Scraper</title>
+    <title>Amazon scraper</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,6 +26,7 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            margin-right: 10px;
         }
         textarea {
             width: 100%;
@@ -35,14 +38,15 @@
     </style>
 </head>
 <body>
-    <h1>Amazon Scraper</h1>
+    <h1>Amazon scraper</h1>
     <form id="scrapeForm">
         <input type="url" id="urlInput" required placeholder="Ingrese la URL a scrapear">
         <button type="submit">Scrapear</button>
     </form>
     <textarea id="resultTextarea" readonly placeholder="Los resultados se mostrarán aquí"></textarea>
     <button id="downloadBtn">Descargar JSON</button>
-    <button id="copyBtn">Copiar</button>
+    <button id="copyBtn">Copiar al portapapeles</button>
+    <button id="downloadImagesBtn">Descargar Imágenes</button>
 
     <script>
         const scrapeForm = document.getElementById('scrapeForm');
@@ -50,6 +54,9 @@
         const resultTextarea = document.getElementById('resultTextarea');
         const downloadBtn = document.getElementById('downloadBtn');
         const copyBtn = document.getElementById('copyBtn');
+        const downloadImagesBtn = document.getElementById('downloadImagesBtn');
+
+        let scrapedData = null;
 
         scrapeForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -62,8 +69,8 @@
                     },
                     body: JSON.stringify({ url }),
                 });
-                const data = await response.json();
-                resultTextarea.value = JSON.stringify(data, null, 2);
+                scrapedData = await response.json();
+                resultTextarea.value = JSON.stringify(scrapedData, null, 2);
             } catch (error) {
                 console.error('Error:', error);
                 resultTextarea.value = 'Error al realizar el scraping';
@@ -88,6 +95,44 @@
         copyBtn.addEventListener('click', () => {
             resultTextarea.select();
             document.execCommand('copy');
+        });
+
+        downloadImagesBtn.addEventListener('click', async () => {
+            if (!scrapedData || (!scrapedData.images && !scrapedData.imagesRev)) {
+                alert('No hay imágenes para descargar');
+                return;
+            }
+
+            const zip = new JSZip();
+
+            async function addImageToZip(url, filename, folder) {
+                try {
+                    const response = await fetch(url);
+                    const blob = await response.blob();
+                    zip.folder(folder).file(filename, blob, {binary: true});
+                } catch (error) {
+                    console.error(`Error al descargar la imagen ${url}:`, error);
+                }
+            }
+
+            if (scrapedData.images && scrapedData.images.length > 0) {
+                const promises = scrapedData.images.map((url, index) => 
+                    addImageToZip(url, `imagen${index + 1}.jpeg`, 'images')
+                );
+                await Promise.all(promises);
+            }
+
+            if (scrapedData.imagesRev && scrapedData.imagesRev.length > 0) {
+                const promises = scrapedData.imagesRev.map((url, index) => 
+                    addImageToZip(url, `review${index + 1}.jpeg`, 'reviews')
+                );
+                await Promise.all(promises);
+            }
+
+            zip.generateAsync({type: 'blob'})
+                .then(function(content) {
+                    saveAs(content, 'imagenes_scrapeadas.zip');
+                });
         });
     </script>
 </body>
