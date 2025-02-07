@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { OpenAI } = require('openai');
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -311,7 +312,7 @@ const generateProductData = async (productName, productDescription, images, imag
   `;
 
     const response = await openai.chat.completions.create({
-        model: 'gpt-4-turbo',
+        model: 'gpt-3.5-turbo',
         messages: [
             { role: 'system', content: 'Sos un asistente que habla en español de Mexico y me ayuda a generar objetos json para productos.' },
             { role: 'user', content: prompt }
@@ -332,9 +333,9 @@ app.post('/scrape', async (req, res) => {
 
     const { productName, productDescription, images, imagesRev } = await scrapeAmazonProductImages(url);
 
-    // const productData = await generateProductData(productName, productDescription, images, imagesRev);
+    const productData = await generateProductData(productName, productDescription, images, imagesRev);
 
-    const productData = { productName, productDescription, images, imagesRev };
+    // const productData = { productName, productDescription, images, imagesRev };
 
     res.json(productData);
 });
