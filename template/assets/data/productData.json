@@ -1,0 +1,136 @@
+{
+    "rating": {
+        "stars": 4.7,
+        "reviews": 850,
+        "text": "Basado en más de 850 opiniones verificadas"
+    },
+    "title": {
+        "first": "Gskyer Telescope",
+        "second": "Telescopio Astronómico Refractante"
+    },
+    "product": {
+        "name": "Gskyer Telescope",
+        "image": "https://m.media-amazon.com/images/I/71cb2RCy+aL._AC_SL1500_.jpg",
+        "trapText": "Telescopio astronómico fácil de usar, ideal para principiantes y niños"
+    },
+    "bottom": {
+        "solution": "Descubre el universo con este telescopio portátil y fácil de usar",
+        "ideal": "Ideal para observación astronómica básica y viajes"
+    },
+    "features": [
+        {
+            "title": "APERTURA DE 70MM",
+            "description": "Permite ver objetos más brillantes y más detalles astronómicos."
+        },
+        {
+            "title": "MONTURA AZIMUTAL",
+            "description": "Simplicidad en la operación, adecuada para principiantes y niños."
+        },
+        {
+            "title": "ADAPTADOR DE TELÉFONO",
+            "description": "Captura fotos y videos de tus observaciones astronómicas directamente desde tu teléfono."
+        },
+        {
+            "title": "CONTROL REMOTO INALÁMBRICO",
+            "description": "Fácil de usar, perfecto para ajustar el telescopio sin tocarlo."
+        }
+    ],
+    "priceBox": {
+        "header": "¡Haz de la astronomía una experiencia divertida y educativa!",
+        "discount": "¡50% DE DESCUENTO!",
+        "originalPrice": "$4500 pesos",
+        "newPrice": "$3600 pesos"
+    },
+    "order": {
+        "offer": "Oferta válida hasta agotar existencias",
+        "stock": "Stock: ¡Quedan solo 15 unidades!"
+    },
+    "efficiency": {
+        "percentage": "95% de satisfacción",
+        "comparison": "con respecto a otros telescopios para principiantes",
+        "description": "Este telescopio está diseñado para proporcionar una excelente experiencia de observación sin complicaciones.",
+        "image": "assets/images/imagen1.jpg"
+    },
+    "positive": {
+        "percentage": "Accesorios adicionales",
+        "comparison": "que telescopios más caros",
+        "description": "A pesar de ser un telescopio básico, ofrece todas las funcionalidades necesarias para una excelente experiencia inicial.",
+        "image": "https://m.media-amazon.com/images/I/71cb2RCy+aL._AC_SL1500_.jpg"
+    },
+    "positiveFeatures": [
+        {
+            "title": "CON VISOR",
+            "description": "Este modelo no incluye un visor de campo amplio, lo que puede dificultar la localización de objetos distantes."
+        },
+        {
+            "title": "PESO MODERADO",
+            "description": "Es portatil, incluso para niños pequeños."
+        }
+    ],
+    "featuresDark": {
+        "title": {
+            "main": "Telescopio Astronómico Gskyer",
+            "highlight": "Ideal para principiantes y niños curiosos"
+        },
+        "description": "Con su diseño fácil de usar y las funcionalidades perfectas para observadores novatos, es ideal para descubrir el universo.",
+        "features": [
+            {
+                "icon": "🔭",
+                "text": "Apertura de 70mm"
+            },
+            {
+                "icon": "🌍",
+                "text": "Portátil y fácil de transportar"
+            },
+            {
+                "icon": "📱",
+                "text": "Adaptador para teléfono móvil"
+            },
+            {
+                "icon": "🎮",
+                "text": "Control remoto inalámbrico"
+            }
+        ]
+    },
+    "reviews": {
+        "ratingDistribution": [
+            { "stars": 5, "count": 600 },
+            { "stars": 4, "count": 150 },
+            { "stars": 3, "count": 50 },
+            { "stars": 2, "count": 30 },
+            { "stars": 1, "count": 20 }
+        ],
+        "userReviews": [
+            {
+                "name": "Pedro",
+                "rating": 5,
+                "verified": true,
+                "comment": "Excelente telescopio para principiantes. Mi hijo está fascinado con las observaciones. Muy recomendable.",
+                "image": "https://m.media-amazon.com/images/I/61SDB37fUwL._AC_SL1365_.jpg"
+            },
+            {
+                "name": "Ana",
+                "rating": 4,
+                "verified": true,
+                "comment": "Muy bueno, aunque el montaje inicial fue algo complicado. Sin embargo, es una excelente opción para los que se inician en la astronomía.",
+                "image": "https://m.media-amazon.com/images/I/61T5nXGBpeL._AC_SL1365_.jpg"
+            }
+        ]
+    },
+    "faq": {
+        "items": [
+            {
+                "question": "¿Es fácil de montar y usar?",
+                "answer": "Sí, el telescopio tiene una montura sencilla y viene con instrucciones fáciles de seguir. Es ideal para principiantes."
+            },
+            {
+                "question": "¿Se puede usar de noche?",
+                "answer": "Sí, es perfecto para observaciones nocturnas. Solo necesitas un lugar oscuro y despejado."
+            },
+            {
+                "question": "¿Puedo usarlo con un teléfono móvil?",
+                "answer": "Sí, incluye un adaptador para teléfono móvil que te permite capturar imágenes y videos de las estrellas."
+            }
+        ]
+    }
+}

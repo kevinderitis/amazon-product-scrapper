@@ -337,6 +337,10 @@ app.post('/scrape', async (req, res) => {
 
     // const productData = { productName, productDescription, images, imagesRev };
 
+    // Hay que hacer un mix entre el contenido de la carpeta template y el json obtenido de openAI para el producto
+    // sumar la carpeta images que contienen las imagenes de producto descargadas. (Guiarse con el script que hay en public/index.html)
+    // armar el zip y hacer el request a keitaro 
+    
     res.json(productData);
 });
 
